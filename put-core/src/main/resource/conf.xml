@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patch-update-tool>
+	<base-path>/Users/lihaoyuan/TempFolder/put</base-path>
+	<program>
+		<path>/Users/lihaoyuan/TempFolder/program1</path>
+		<path>/Users/lihaoyuan/TempFolder/program2</path>
+		<path>/Users/lihaoyuan/TempFolder/program3</path>
+	</program>
+	<error-handle>IGNORE</error-handle>
+</patch-update-tool>
