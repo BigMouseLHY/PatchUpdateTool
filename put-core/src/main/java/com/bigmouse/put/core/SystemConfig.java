@@ -1,6 +1,6 @@
 package com.bigmouse.put.core;
 
-import java.util.List;
+import java.util.Map;
 
 /*
  * Global config of PUT. All the properties are configed in conf.xml, you need not to set theme is you java code.
@@ -20,7 +20,7 @@ public class SystemConfig
 	/**
 	 * The list of root path of the program.
 	 */
-	public static List<String> PROGRAM_LIST;
+	public static Map<String, String> PROGRAM_MAP;
 	
 	/**
 	 * How to do when error occurred.

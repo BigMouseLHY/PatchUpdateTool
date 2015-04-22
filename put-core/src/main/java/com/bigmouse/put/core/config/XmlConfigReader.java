@@ -1,9 +1,10 @@
 package com.bigmouse.put.core.config;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import org.dom4j.Node;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,12 +45,14 @@ public class XmlConfigReader implements ConfigService
 			log.info("Got error handle type: " + SystemConfig.ERROR_HANDLE);
 			
 			// get program path list
-			List<String> programs = reader.getElementTextList("/patch-update-tool/program/path");
-			SystemConfig.PROGRAM_LIST = new ArrayList<String>();
-			for(String path : programs)
+			List<Node> programs = reader.getElementNodes("/patch-update-tool/program/path");
+			SystemConfig.PROGRAM_MAP = new HashMap<String, String>();
+			for(Node node : programs)
 			{
-				SystemConfig.PROGRAM_LIST.add(path);
-				log.info("Got program path: " + path);
+				String pid = node.valueOf("@id");
+				String val = node.getText();
+				SystemConfig.PROGRAM_MAP.put(pid, val);
+				log.info("Got program path: " + pid + " -> " + val);
 			}
 			log.info("Load config finish!");
 		}
