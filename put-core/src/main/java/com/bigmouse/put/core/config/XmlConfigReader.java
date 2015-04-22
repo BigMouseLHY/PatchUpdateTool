@@ -17,7 +17,7 @@ import com.bigmouse.put.utils.XmlReader.XmlReaderException;
  * @author lihaoyuan
  *
  */
-public class ConfigServiceXmlLoader implements ConfigService
+public class XmlConfigReader implements ConfigService
 {
 	private transient final Logger log = LoggerFactory.getLogger(getClass());
 

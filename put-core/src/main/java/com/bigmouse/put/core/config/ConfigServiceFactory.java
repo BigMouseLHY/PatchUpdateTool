@@ -9,6 +9,6 @@ public class ConfigServiceFactory
 {
 	public static ConfigService getConfigService()
 	{
-		return new ConfigServiceXmlLoader();
+		return new XmlConfigReader();
 	}
 }
