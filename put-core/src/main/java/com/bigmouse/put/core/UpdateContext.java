@@ -9,8 +9,18 @@ import java.util.List;
  */
 public class UpdateContext
 {
+	private String version;
 	private List<FileDescription> files;
 	private List<ProgramItem> programs;
+
+	public String getVersion()
+	{
+		return version;
+	}
+	public void setVersion(String version)
+	{
+		this.version = version;
+	}
 	
 	public List<FileDescription> getFiles()
 	{

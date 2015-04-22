@@ -26,7 +26,9 @@ public class XmlConfigReader implements ConfigService
 	public void loadConfig() throws PatchUpdateException
 	{
 		// get config file path
-		String configPath = this.getClass().getResource("/").getPath() + File.separator + "conf.xml";
+		String configPath = this.getClass().getResource("/").getPath();
+		if(configPath.endsWith(File.separator)) configPath += "conf.xml";
+		else configPath += File.separator + "conf.xml";
 		
 		log.info("Start to load config in " + configPath);
 		XmlReader reader = new XmlReader(configPath);
