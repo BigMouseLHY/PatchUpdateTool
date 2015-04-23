@@ -1,7 +1,7 @@
 *.class
-
+logs/
 # Config files for eclipse
-.settings
+.settings/
 .classpath
 .project
 

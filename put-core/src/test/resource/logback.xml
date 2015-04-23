@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<substitutionProperty name="logbackHome" value="logs" />
+	
+	<!-- create new log file every day -->
+	<!-- Console output -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<Encoding>gb2312</Encoding>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<!-- INFO -->
+	<appender name="FILELOG-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+	    <Prudent>true</Prudent>
+	    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+          <level>INFO</level>
+        </filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/info%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<!-- DEBUG -->
+	<appender name="FILELOG-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+	    <Prudent>true</Prudent>
+	    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+          <level>DEBUG</level>
+        </filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/debug%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<!-- ERROR -->
+	<appender name="FILELOG-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+	    <Prudent>true</Prudent>
+	    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+          <level>ERROR</level>
+        </filter>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logbackHome}/error%d{yyyy-MM-dd'.log'}</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
+		</layout>
+	</appender>
+	
+	<logger name="com.bigmouse.put" level="DEBUG">
+	  	<appender-ref ref="CONSOLE"/>  
+        <appender-ref ref="FILELOG-DEBUG"/>
+	</logger> 
+
+	 <root level="DEBUG">
+	  	<appender-ref ref="CONSOLE"/>  
+        <appender-ref ref="FILELOG-INFO"/>
+        <appender-ref ref="FILELOG-ERROR"/>
+    </root> 
+</configuration>

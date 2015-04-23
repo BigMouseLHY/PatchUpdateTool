@@ -2,6 +2,8 @@ package com.bigmouse.put.core;
 
 import java.util.List;
 
+import com.bigmouse.put.core.observer.ProcessObserver;
+
 /**
  * Context of update process
  * @author lihaoyuan
@@ -9,9 +11,25 @@ import java.util.List;
  */
 public class UpdateContext
 {
+	/**
+	 * Version of the package
+	 */
 	private String version;
+	
+	/**
+	 * List of files config in version.put in package
+	 */
 	private List<FileDescription> files;
+	
+	/**
+	 * List of programs
+	 */
 	private List<ProgramItem> programs;
+	
+	/*
+	 * Observer of process
+	 */
+	private ProcessObserver observer;
 
 	public String getVersion()
 	{
@@ -38,5 +56,13 @@ public class UpdateContext
 	public void setPrograms(List<ProgramItem> programs)
 	{
 		this.programs = programs;
+	}
+	public ProcessObserver getObserver()
+	{
+		return observer;
+	}
+	public void setObserver(ProcessObserver observer)
+	{
+		this.observer = observer;
 	}
 }
