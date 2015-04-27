@@ -7,11 +7,12 @@ import junit.framework.TestCase;
 
 public class ConfigServiceTest extends TestCase
 {
-
 	public void testLoadConfig() throws PatchUpdateException
 	{
 		ConfigService configService = ConfigServiceFactory.getConfigService();
-		
+		UpdateContext context = UpdateContext.getContext();
+		TestObserverFacade facade = new TestObserverFacade(new TestObserver());
+		context.setObserver(facade);
 		configService.loadConfig();
 		
 		assertEquals("/Users/lihaoyuan/TempFolder/put", SystemConfig.BASE_PATH);

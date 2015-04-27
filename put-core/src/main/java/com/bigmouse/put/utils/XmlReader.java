@@ -12,6 +12,8 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bigmouse.put.log.PutLogObserverProxy;
+
 /**
  * Tool for read xml file
  * @author lihaoyuan
@@ -19,7 +21,7 @@ import org.slf4j.LoggerFactory;
  */
 public class XmlReader
 {
-	private transient final Logger log = LoggerFactory.getLogger(getClass());
+	private transient final Logger log = new PutLogObserverProxy().proxy(LoggerFactory.getLogger(getClass()));
 	
 	private String xmlPath;
 	private Document doc;

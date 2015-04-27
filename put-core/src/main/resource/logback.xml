@@ -6,7 +6,7 @@
 	<!-- Console output -->
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
 		<Encoding>gb2312</Encoding>
-		<layout class="ch.qos.logback.classic.PatternLayout">
+		<layout class="com.bigmouse.put.log.PutPatternLayout">
 			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</pattern>
 		</layout>
 	</appender>
@@ -21,7 +21,7 @@
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>${logbackHome}/info%d{yyyy-MM-dd'.log'}</FileNamePattern>
 		</rollingPolicy>
-		<layout class="ch.qos.logback.classic.PatternLayout">
+		<layout class="com.bigmouse.put.log.PutPatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
 		</layout>
 	</appender>
@@ -36,7 +36,7 @@
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>${logbackHome}/debug%d{yyyy-MM-dd'.log'}</FileNamePattern>
 		</rollingPolicy>
-		<layout class="ch.qos.logback.classic.PatternLayout">
+		<layout class="com.bigmouse.put.log.PutPatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
 		</layout>
 	</appender>
@@ -51,17 +51,12 @@
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>${logbackHome}/error%d{yyyy-MM-dd'.log'}</FileNamePattern>
 		</rollingPolicy>
-		<layout class="ch.qos.logback.classic.PatternLayout">
+		<layout class="com.bigmouse.put.log.PutPatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
 		</layout>
 	</appender>
-	
-	<logger name="com.bigmouse.put" level="DEBUG">
-	  	<appender-ref ref="CONSOLE"/>  
-        <appender-ref ref="FILELOG-DEBUG"/>
-	</logger> 
 
-	 <root level="DEBUG">
+	 <root level="INFO">
 	  	<appender-ref ref="CONSOLE"/>  
         <appender-ref ref="FILELOG-INFO"/>
         <appender-ref ref="FILELOG-ERROR"/>
