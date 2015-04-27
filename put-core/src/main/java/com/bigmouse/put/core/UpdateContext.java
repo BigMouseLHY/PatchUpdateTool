@@ -2,6 +2,7 @@ package com.bigmouse.put.core;
 
 import java.util.List;
 
+import com.bigmouse.put.core.observer.EmptyObserver;
 import com.bigmouse.put.core.observer.ProcessObserver;
 
 /**
@@ -11,6 +12,19 @@ import com.bigmouse.put.core.observer.ProcessObserver;
  */
 public class UpdateContext
 {
+	private static UpdateContext context;
+	
+	/**
+	 * Singleton context
+	 * @return context
+	 */
+	public static synchronized UpdateContext getContext()
+	{
+		if(context == null) context = new UpdateContext();
+		
+		return context;
+	}
+	
 	/**
 	 * Version of the package
 	 */
@@ -59,6 +73,7 @@ public class UpdateContext
 	}
 	public ProcessObserver getObserver()
 	{
+		if(observer == null) observer = new EmptyObserver();
 		return observer;
 	}
 	public void setObserver(ProcessObserver observer)
