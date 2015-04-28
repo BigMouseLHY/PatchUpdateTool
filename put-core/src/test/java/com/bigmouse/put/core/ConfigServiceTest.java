@@ -1,12 +1,15 @@
 package com.bigmouse.put.core;
 
+import org.junit.Test;
+
 import com.bigmouse.put.core.config.ConfigService;
 import com.bigmouse.put.core.config.ConfigServiceFactory;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
 
-public class ConfigServiceTest extends TestCase
+public class ConfigServiceTest
 {
+	@Test
 	public void testLoadConfig() throws PatchUpdateException
 	{
 		ConfigService configService = ConfigServiceFactory.getConfigService();
@@ -31,5 +34,4 @@ public class ConfigServiceTest extends TestCase
 		assertTrue(SystemConfig.PROGRAM_MAP.containsKey("p3"));
 		assertEquals("/Users/lihaoyuan/TempFolder/program3", SystemConfig.PROGRAM_MAP.get("p3"));
 	}
-
 }

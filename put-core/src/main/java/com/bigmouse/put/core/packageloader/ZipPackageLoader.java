@@ -22,10 +22,11 @@ import com.bigmouse.put.core.FileDescription;
 import com.bigmouse.put.core.PatchUpdateException;
 import com.bigmouse.put.core.SystemConfig;
 import com.bigmouse.put.core.UpdateContext;
+import com.bigmouse.put.log.PutLogObserverProxy;
 
 public class ZipPackageLoader implements PackageLoadService
 {
-	private transient final Logger log = LoggerFactory.getLogger(getClass());
+	private transient final Logger log = new PutLogObserverProxy().proxy(LoggerFactory.getLogger(getClass()));
 	
 	@Override
 	public void loadPackage(UpdateContext context, String packageFilePath) throws PatchUpdateException
@@ -35,12 +36,14 @@ public class ZipPackageLoader implements PackageLoadService
 		String tempPath = SystemConfig.BASE_PATH + File.separator + "temp";
 		
 		log.info("Create temp folder and unzip package into it.");
+		context.getObserver().message("Create temp folder and unzip package into it.", "INFO");
 
 		File zipFile = new File(packageFilePath);
 		File tempFolder = new File(tempPath);
 
 		// Create temp folder for unzip
 		log.info("Create temp folder: " + packageFilePath);
+		context.getObserver().message("Create temp folder and unzip package into it.", "INFO");
 		createTempFolder(zipFile, tempFolder);
 		
 		// Unzip
@@ -207,14 +210,6 @@ public class ZipPackageLoader implements PackageLoadService
 					unZipFile.mkdirs();
 					continue;
 				}
-				/*
-				else
-				{
-					log.debug("Create folder:" + unZipFile.getAbsolutePath());
-					File parentFile = unZipFile.getParentFile();
-					if(parentFile != null) parentFile.mkdirs();
-				}
-				*/
 				
 				if(entry.getName().toLowerCase().startsWith("files/"))
 				{
