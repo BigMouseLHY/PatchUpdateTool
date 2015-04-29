@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -79,7 +78,6 @@ public class ZipPackageLoader implements PackageLoadService
 	private void buildVersionFolder(String version) throws PatchUpdateException
 	{
 		File versionFolder = new File(SystemConfig.BASE_PATH + File.separator + version);
-		File backupFolder = new File(SystemConfig.BASE_PATH + File.separator + version + File.separator + "backup");
 		File updateFolder = new File(SystemConfig.BASE_PATH + File.separator + version + File.separator + "update");
 		if(versionFolder.exists())
 		{
@@ -94,7 +92,6 @@ public class ZipPackageLoader implements PackageLoadService
 		}
 		
 		versionFolder.mkdirs();
-		backupFolder.mkdir();
 		updateFolder.mkdir();
 	}
 
@@ -111,8 +108,6 @@ public class ZipPackageLoader implements PackageLoadService
 			@SuppressWarnings("unchecked")
 			List<String> verLines = FileUtils.readLines(versionFile);
 			if(verLines == null || verLines.size() == 0) throw new PatchUpdateException("Format of version.put error!");
-			
-			context.setFiles(new ArrayList<FileDescription>());
 			
 			for(String line : verLines)
 			{
@@ -139,7 +134,7 @@ public class ZipPackageLoader implements PackageLoadService
 					if(!updateType.equals("D") && !files.contains(updatePath))  throw new PatchUpdateException("No such file: " + updatePath);
 					log.debug("Got file: " + line);
 					
-					context.getFiles().add(fileDesc);
+					context.getFiles().put(updatePath, fileDesc);
 				}
 			}
 		}

@@ -1,6 +1,7 @@
 package com.bigmouse.put.core;
 
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import com.bigmouse.put.core.observer.EmptyObserver;
 import com.bigmouse.put.core.observer.ProcessObserver;
@@ -33,12 +34,12 @@ public class UpdateContext
 	/**
 	 * List of files config in version.put in package
 	 */
-	private List<FileDescription> files;
+	private Map<String, FileDescription> files;
 	
 	/**
 	 * List of programs
 	 */
-	private List<ProgramItem> programs;
+	private Map<String, ProgramItem> programs;
 	
 	/*
 	 * Observer of process
@@ -53,23 +54,15 @@ public class UpdateContext
 	{
 		this.version = version;
 	}
-	
-	public List<FileDescription> getFiles()
+	public Map<String, FileDescription> getFiles()
 	{
+		if(files == null) files = new LinkedHashMap<String, FileDescription>();
 		return files;
 	}
-	public void setFiles(List<FileDescription> files)
+	public Map<String, ProgramItem> getPrograms()
 	{
-		this.files = files;
-	}
-	
-	public List<ProgramItem> getPrograms()
-	{
+		if(programs == null) programs = new LinkedHashMap<String, ProgramItem>();
 		return programs;
-	}
-	public void setPrograms(List<ProgramItem> programs)
-	{
-		this.programs = programs;
 	}
 	public ProcessObserver getObserver()
 	{

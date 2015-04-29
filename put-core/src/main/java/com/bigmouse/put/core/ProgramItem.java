@@ -1,5 +1,6 @@
 package com.bigmouse.put.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,6 +10,15 @@ import java.util.List;
  */
 public class ProgramItem
 {
+	public ProgramItem(String id, String rootPath)
+	{
+		this.id = id;
+		this.rootPath = rootPath;
+		this.files = new ArrayList<FileItem>();
+		this.status = "INIT";
+	}
+	
+	private String id;
 	/**
 	 * The root path of program
 	 */
@@ -21,8 +31,18 @@ public class ProgramItem
 	
 	/**
 	 * The update status of program
+	 * INIT, BACKUP, UPDATE, FINISH
 	 */
 	private String status;
+	
+	public String getId()
+	{
+		return id;
+	}
+	public void setId(String id)
+	{
+		this.id = id;
+	}
 	
 	public String getRootPath()
 	{

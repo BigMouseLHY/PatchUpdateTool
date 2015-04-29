@@ -26,7 +26,7 @@ public class PackageLoaderTest
 		context.setObserver(facade);
 		
 		ConfigService configService = ConfigServiceFactory.getConfigService();
-		configService.loadConfig();
+		configService.loadConfig(context);
 	}
 	
 	@Test

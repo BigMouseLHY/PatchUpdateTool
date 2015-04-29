@@ -9,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bigmouse.put.core.PatchUpdateException;
+import com.bigmouse.put.core.ProgramItem;
 import com.bigmouse.put.core.SystemConfig;
+import com.bigmouse.put.core.UpdateContext;
 import com.bigmouse.put.log.PutLogObserverProxy;
 import com.bigmouse.put.utils.XmlReader;
 import com.bigmouse.put.utils.XmlReader.XmlReaderException;
@@ -24,7 +26,7 @@ public class XmlConfigReader implements ConfigService
 	private transient final Logger log = new PutLogObserverProxy().proxy(LoggerFactory.getLogger(getClass()));
 
 	@Override
-	public void loadConfig() throws PatchUpdateException
+	public void loadConfig(UpdateContext context) throws PatchUpdateException
 	{
 		// get config file path
 		String configPath = this.getClass().getResource("/").getPath();
@@ -55,6 +57,10 @@ public class XmlConfigReader implements ConfigService
 				String pid = node.valueOf("@id");
 				String val = node.getText();
 				SystemConfig.PROGRAM_MAP.put(pid, val);
+				
+				ProgramItem program = new ProgramItem(pid, val);
+				context.getPrograms().put(pid, program);
+				
 				log.info("Got program path: " + pid + " -> " + val);
 			}
 			log.info("Load config finish!");
