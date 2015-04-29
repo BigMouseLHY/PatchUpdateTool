@@ -71,7 +71,9 @@ public class ZipPackageLoader implements PackageLoadService
 		}
 		catch (IOException e)
 		{
-			throw new PatchUpdateException("Can not copy files to version folder: " + e.getMessage(), e);
+			PatchUpdateException ex = new PatchUpdateException("Can not copy files to version folder!", e);
+			log.error("Can not copy files to version folder!", e);
+			throw ex;
 		}
 	}
 
@@ -87,7 +89,9 @@ public class ZipPackageLoader implements PackageLoadService
 			}
 			catch (IOException e)
 			{
-				throw new PatchUpdateException("Build version folder error: " + e.getMessage(), e);
+				PatchUpdateException ex = new PatchUpdateException("Build version folder error!", e);
+				log.error("Build version folder error!", e);
+				throw ex;
 			}
 		}
 		
@@ -98,7 +102,12 @@ public class ZipPackageLoader implements PackageLoadService
 	private void readVersion(UpdateContext context, Set<String> files, String tempPath) throws PatchUpdateException
 	{
 		File versionFile = new File(tempPath + File.separator + "version.put");
-		if(!versionFile.exists()) throw new PatchUpdateException("Package file must has a version.put file!");
+		if(!versionFile.exists())
+		{
+			PatchUpdateException ex = new PatchUpdateException("Package file must has a version.put file!");
+			log.error("Package file must has a version.put file!");
+			throw ex;
+		}
 		
 		// Read version.put
 		try
@@ -107,7 +116,12 @@ public class ZipPackageLoader implements PackageLoadService
 			log.debug("Read file: " + tempPath + File.separator + "version.put");
 			@SuppressWarnings("unchecked")
 			List<String> verLines = FileUtils.readLines(versionFile);
-			if(verLines == null || verLines.size() == 0) throw new PatchUpdateException("Format of version.put error!");
+			if(verLines == null || verLines.size() == 0)
+			{
+				PatchUpdateException ex = new PatchUpdateException("Format of version.put error!");
+				log.error("Format of version.put error!");
+				throw ex;
+			}
 			
 			for(String line : verLines)
 			{
@@ -131,7 +145,12 @@ public class ZipPackageLoader implements PackageLoadService
 					fileDesc.setOpt(updateType);
 					fileDesc.setFilePath(updatePath);
 
-					if(!updateType.equals("D") && !files.contains(updatePath))  throw new PatchUpdateException("No such file: " + updatePath);
+					if(!updateType.equals("D") && !files.contains(updatePath))
+					{
+						PatchUpdateException ex = new PatchUpdateException("No such file: " + updatePath);
+						log.error("No such file: " + updatePath);
+						throw ex;
+					}
 					log.debug("Got file: " + line);
 					
 					context.getFiles().put(updatePath, fileDesc);
@@ -140,15 +159,27 @@ public class ZipPackageLoader implements PackageLoadService
 		}
 		catch (IOException e)
 		{
-			throw new PatchUpdateException("Can not read version.put: " + e.getMessage(), e);
+			PatchUpdateException ex = new PatchUpdateException("Can not read version.put!", e);
+			log.error("Can not read version.put!", e);
+			throw ex;
 		}
 	}
 
 	private void createTempFolder(File zipFile, File tempFolder) throws PatchUpdateException
 	{
 		// Check file exist
-		if(!zipFile.exists()) throw new PatchUpdateException("Package file not exist!");
-		if(!isZipFile(zipFile)) throw new PatchUpdateException("Package file must be a zip file!");
+		if(!zipFile.exists())
+		{
+			PatchUpdateException ex = new PatchUpdateException("Package file not exist!");
+			log.error("Package file not exist!");
+			throw ex;
+		}
+		if(!isZipFile(zipFile))
+		{
+			PatchUpdateException ex = new PatchUpdateException("Package file must be a zip file!");
+			log.error("Package file must be a zip file!");
+			throw ex;
+		}
 		
 		// Create temp folder
 		log.debug("Create temp folder, and clear it");
@@ -159,7 +190,9 @@ public class ZipPackageLoader implements PackageLoadService
 		}
 		catch (IOException e)
 		{
-			throw new PatchUpdateException("Can not create temp folder: " + e.getMessage(), e);
+			PatchUpdateException ex = new PatchUpdateException("Can not create temp folder!", e);
+			log.error("Can not create temp folder!", e);
+			throw ex;
 		}
 	}
 	
@@ -195,8 +228,9 @@ public class ZipPackageLoader implements PackageLoadService
 				ZipArchiveEntry entry = en.nextElement();
 				
 				// skip MAC file
-				if(entry.getName().startsWith("__MACOSX")) continue;
-				if(entry.getName().indexOf(".DS_Store") > 0) continue;
+				if(entry.getName().indexOf("__MACOSX") > -1) continue;
+				if(entry.getName().indexOf(".DS_Store") > -1) continue;
+				if(entry.getName().indexOf(".svn") > -1) continue;
 				
 				File unZipFile = new File(unzipPath, entry.getName());
 				if(entry.isDirectory())
@@ -225,7 +259,9 @@ public class ZipPackageLoader implements PackageLoadService
 		}
 		catch (IOException e)
 		{
-			throw new PatchUpdateException("Can not unzip package: " + e.getMessage(), e);
+			PatchUpdateException ex = new PatchUpdateException("Can not unzip package!", e);
+			log.error("Can not unzip package!", e);
+			throw ex;
 		}
 		finally
 		{

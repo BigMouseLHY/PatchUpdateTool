@@ -39,7 +39,12 @@ public class XmlConfigReader implements ConfigService
 		{
 			// get base path
 			String basePath = reader.getElementText("/patch-update-tool/base-path");
-			if(basePath == null) throw new PatchUpdateException("conf.xml MUST has <base-path> node!");
+			if(basePath == null)
+			{
+				PatchUpdateException ex = new PatchUpdateException("conf.xml MUST has <base-path> node!");
+				log.error("conf.xml MUST has <base-path> node!");
+				throw ex;
+			}
 			SystemConfig.BASE_PATH = basePath;
 			log.info("Got base path: " + SystemConfig.BASE_PATH);
 			
@@ -67,7 +72,8 @@ public class XmlConfigReader implements ConfigService
 		}
 		catch (XmlReaderException e)
 		{
-			PatchUpdateException ex = new PatchUpdateException("Read config file ERROR! " + e.getMessage(), e);
+			PatchUpdateException ex = new PatchUpdateException("Read config file ERROR!", e);
+			log.error("Read config file ERROR!", e);
 			throw ex;
 		}
 	}
