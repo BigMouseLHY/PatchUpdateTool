@@ -58,8 +58,10 @@ public class ZipPackageLoader implements PackageLoadService
 		buildVersionFolder(version);
 		
 		// Move files from temp folder to update version folder
-		log.info("Move files from temp folder to update version folder");
-		moveFiles(tempFolder, new File(SystemConfig.BASE_PATH + File.separator + version + File.separator + "update"));
+		log.info("Move files from temp folder to update folder");
+		String updateFolder = SystemConfig.BASE_PATH + File.separator + version + File.separator + "update";
+		moveFiles(tempFolder, new File(updateFolder));
+		log.info("All files has moved to update folder: " + updateFolder + ", " + context.getFiles().size() + " files.");
 	}
 
 	private void moveFiles(File tempFolder, File updateFolder) throws PatchUpdateException

@@ -3,7 +3,9 @@ package com.bigmouse.put.core;
 import java.io.IOException;
 
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import com.bigmouse.put.core.config.ConfigService;
 import com.bigmouse.put.core.config.ConfigServiceFactory;
@@ -12,6 +14,7 @@ import com.bigmouse.put.core.packageloader.PackageLoadServiceFactory;
 
 import static org.junit.Assert.*;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PackageLoaderTest
 {
 	private static UpdateContext context;
@@ -30,21 +33,21 @@ public class PackageLoaderTest
 	}
 	
 	@Test
-	public void loadPackage() throws PatchUpdateException
+	public void test01_loadPackage() throws PatchUpdateException
 	{
 		PackageLoadService zipPackageLoader = PackageLoadServiceFactory.getPackageLoadService();
 		zipPackageLoader.loadPackage(context, SystemConfig.BASE_PATH + "/source/update.zip");
 	}
 	
 	@Test
-	public void checkBaseFolder()
+	public void test02_checkBaseFolder()
 	{
 		assertFalse(TestUtils.checkPath(SystemConfig.BASE_PATH + "/temp/"));
 		assertTrue(TestUtils.checkPath(SystemConfig.BASE_PATH + "/" + version + "/"));
 	}
 
 	@Test
-	public void checkUpdateFolder() throws IOException
+	public void test03_checkUpdateFolder() throws IOException
 	{
 		String updateFolderBase = SystemConfig.BASE_PATH + "/" + version + "/update/";
 		// Check update folder
