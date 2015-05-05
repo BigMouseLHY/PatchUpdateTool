@@ -28,4 +28,10 @@ public class SystemConfig
 	 * IGNORE: skip the error file and continue update
 	 */
 	public static String ERROR_HANDLE;
+	
+	public static String IGNORETIP()
+	{
+		if(ERROR_HANDLE.equals("IGNORE")) return "<IGNORE>";
+		else return "";
+	}
 }

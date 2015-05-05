@@ -107,7 +107,7 @@ public class ZipPackageLoader implements PackageLoadService
 		if(!versionFile.exists())
 		{
 			PatchUpdateException ex = new PatchUpdateException("Package file must has a version.put file!");
-			log.error("Package file must has a version.put file!");
+			log.error("Package file must has a version.put file!", ex);
 			throw ex;
 		}
 		
@@ -121,7 +121,7 @@ public class ZipPackageLoader implements PackageLoadService
 			if(verLines == null || verLines.size() == 0)
 			{
 				PatchUpdateException ex = new PatchUpdateException("Format of version.put error!");
-				log.error("Format of version.put error!");
+				log.error("Format of version.put error!", ex);
 				throw ex;
 			}
 			

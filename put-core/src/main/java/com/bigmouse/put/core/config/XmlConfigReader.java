@@ -42,7 +42,7 @@ public class XmlConfigReader implements ConfigService
 			if(basePath == null)
 			{
 				PatchUpdateException ex = new PatchUpdateException("conf.xml MUST has <base-path> node!");
-				log.error("conf.xml MUST has <base-path> node!");
+				log.error("conf.xml MUST has <base-path> node!", ex);
 				throw ex;
 			}
 			SystemConfig.BASE_PATH = basePath;

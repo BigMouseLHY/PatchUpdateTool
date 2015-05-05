@@ -62,24 +62,17 @@ public class DefaultBackupHandler implements BackupService
 					}
 					catch (IOException e)
 					{
-						log.error("Can not backup file: " + oldFilePath);
-						PatchUpdateException ex = new PatchUpdateException("Can not backup file: " + oldFilePath, e);
-						throw ex;
+						PatchUpdateException ex = new PatchUpdateException(SystemConfig.IGNORETIP() + "Can not backup file: " + oldFilePath, e);
+						log.error(SystemConfig.IGNORETIP() + "Can not backup file: " + oldFilePath, e);
+						if(!SystemConfig.ERROR_HANDLE.equals("IGNORE")) throw ex;
 					}
 				}
 				else
 				{
-					// If there no such file, ignore it or throw exception
-					if(SystemConfig.ERROR_HANDLE.equals("IGNORE"))
-					{
-						log.warn("No such file for backup: " + oldFilePath);
-					}
-					else
-					{
-						log.error("No such file for backup: " + oldFilePath);
-						PatchUpdateException e = new PatchUpdateException("No such file for backup: " + oldFilePath);
-						throw e;
-					}
+					PatchUpdateException e = new PatchUpdateException(SystemConfig.IGNORETIP() + "No such file for backup: " + oldFilePath);
+					log.error(SystemConfig.IGNORETIP() + "No such file for backup: " + oldFilePath, e);
+					// If not ignore, throw exception
+					if(!SystemConfig.ERROR_HANDLE.equals("IGNORE")) throw e;
 				}
 			}
 			fileItem.setStatus("BACKUP");

@@ -53,9 +53,9 @@ public class DefaultUpdateHandler implements UpdateService
 				}
 				catch (IOException e)
 				{
-					log.error("Can not update file: " + fileDesc.getFilePath());
-					PatchUpdateException ex = new PatchUpdateException("Can not update file: " + fileDesc.getFilePath(), e);
-					throw ex;
+					PatchUpdateException ex = new PatchUpdateException(SystemConfig.IGNORETIP() + "Can not update file: " + fileDesc.getFilePath(), e);
+					log.error(SystemConfig.IGNORETIP() + "Can not update file: " + fileDesc.getFilePath(), e);
+					if(!SystemConfig.ERROR_HANDLE.equals("IGNORE")) throw ex;
 				}
 				
 				if(fileDesc.getOpt().equals("A")) addCount++;
@@ -75,9 +75,9 @@ public class DefaultUpdateHandler implements UpdateService
 				}
 				catch (IOException e)
 				{
-					log.error("Can not delete file: " + fileDesc.getFilePath());
-					PatchUpdateException ex = new PatchUpdateException("Can not delete file: " + fileDesc.getFilePath(), e);
-					throw ex;
+					PatchUpdateException ex = new PatchUpdateException(SystemConfig.IGNORETIP() + "Can not delete file: " + fileDesc.getFilePath(), e);
+					log.error(SystemConfig.IGNORETIP() + "Can not delete file: " + fileDesc.getFilePath(), e);
+					if(!SystemConfig.ERROR_HANDLE.equals("IGNORE")) throw ex;
 				}
 				deleteCount++;
 				
@@ -106,9 +106,9 @@ public class DefaultUpdateHandler implements UpdateService
 				}
 				catch (IOException e)
 				{
-					log.error("Can not rollback file: " + fileItem.getUpdatePath());
-					PatchUpdateException ex = new PatchUpdateException("Can not rollback file: " + fileItem.getUpdatePath(), e);
-					throw ex;
+					PatchUpdateException ex = new PatchUpdateException(SystemConfig.IGNORETIP() + "Can not rollback file: " + fileItem.getUpdatePath(), e);
+					log.error(SystemConfig.IGNORETIP() + "Can not rollback file: " + fileItem.getUpdatePath(), e);
+					if(!SystemConfig.ERROR_HANDLE.equals("IGNORE")) throw ex;
 				}
 				
 				rollbackCount++;
@@ -122,9 +122,9 @@ public class DefaultUpdateHandler implements UpdateService
 				}
 				catch (IOException e)
 				{
-					log.error("Can not rollback delete file: " + fileItem.getUpdatePath());
-					PatchUpdateException ex = new PatchUpdateException("Can not rollback delete file: " + fileItem.getUpdatePath(), e);
-					throw ex;
+					PatchUpdateException ex = new PatchUpdateException(SystemConfig.IGNORETIP() + "Can not rollback delete file: " + fileItem.getUpdatePath(), e);
+					log.error(SystemConfig.IGNORETIP() + "Can not rollback delete file: " + fileItem.getUpdatePath(), e);
+					if(!SystemConfig.ERROR_HANDLE.equals("IGNORE")) throw ex;
 				}
 				rollbackCount++;
 			}

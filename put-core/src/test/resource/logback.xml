@@ -36,7 +36,7 @@
 		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
 			<FileNamePattern>${logbackHome}/debug%d{yyyy-MM-dd'.log'}</FileNamePattern>
 		</rollingPolicy>
-		<layout class="com.bigmouse.put.observerlog.ObserverPatternLayout">
+		<layout class="com.bigmouse.put.log.PutPatternLayout">
 			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread]  %-5level %logger{80}[%L] - %msg%n</Pattern>
 		</layout>
 	</appender>
