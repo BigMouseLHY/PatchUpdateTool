@@ -1,7 +1,7 @@
 package com.bigmouse.put.core;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Update informatin of program
@@ -14,7 +14,7 @@ public class ProgramItem
 	{
 		this.id = id;
 		this.rootPath = rootPath;
-		this.files = new ArrayList<FileItem>();
+		this.files = new LinkedHashMap<String, FileItem>();
 		this.status = "INIT";
 	}
 	
@@ -27,7 +27,7 @@ public class ProgramItem
 	/**
 	 * Update logs of file
 	 */
-	private List<FileItem> files;
+	private Map<String, FileItem> files;
 	
 	/**
 	 * The update status of program
@@ -52,11 +52,11 @@ public class ProgramItem
 	{
 		this.rootPath = rootPath;
 	}
-	public List<FileItem> getFiles()
+	public Map<String, FileItem> getFiles()
 	{
 		return files;
 	}
-	public void setFiles(List<FileItem> files)
+	public void setFiles(Map<String, FileItem> files)
 	{
 		this.files = files;
 	}

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.bigmouse.put.core.FileDescription;
+import com.bigmouse.put.core.FileItem;
 import com.bigmouse.put.core.PatchUpdateException;
 import com.bigmouse.put.core.ProgramItem;
 import com.bigmouse.put.core.SystemConfig;
@@ -38,6 +39,11 @@ public class DefaultBackupHandler implements BackupService
 		int backupFileCount = 0;
 		for(FileDescription fileDesc : context.getFiles().values())
 		{
+			FileItem fileItem = new FileItem();
+			fileItem.setOpt(fileDesc.getOpt());
+			fileItem.setStatus("INIT");
+			program.getFiles().put(fileDesc.getFilePath(), fileItem);
+			
 			if(fileDesc.getOpt().equals("U") || fileDesc.getOpt().equals("D"))
 			{
 				String oldFilePath = program.getRootPath() + fileDesc.getFilePath();
@@ -51,6 +57,8 @@ public class DefaultBackupHandler implements BackupService
 						log.debug("Copy file to backup folder: " + programBackupPathBase + fileDesc.getFilePath());
 						FileUtils.copyFile(oldFile, backupFile);
 						backupFileCount++;
+
+						fileItem.setBackupPath(programBackupPathBase + fileDesc.getFilePath());
 					}
 					catch (IOException e)
 					{
@@ -74,6 +82,7 @@ public class DefaultBackupHandler implements BackupService
 					}
 				}
 			}
+			fileItem.setStatus("BACKUP");
 		}
 		log.info("All files has backup to program backup folder: " + programBackupFolder + ", " + backupFileCount + " files.");
 	}

@@ -12,4 +12,5 @@ import com.bigmouse.put.core.UpdateContext;
 public interface UpdateService
 {
 	public void update(UpdateContext context, ProgramItem program) throws PatchUpdateException;
+	public void rollback(UpdateContext context, ProgramItem program) throws PatchUpdateException;
 }
