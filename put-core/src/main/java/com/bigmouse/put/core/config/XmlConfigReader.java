@@ -77,6 +77,4 @@ public class XmlConfigReader implements ConfigService
 			throw ex;
 		}
 	}
-	
-
 }

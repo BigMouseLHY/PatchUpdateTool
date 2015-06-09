@@ -14,16 +14,20 @@ public class PUTCore
 {
 	public static void patchAutomatic(ProcessObserverFacade<?> observer, String filePath) throws PatchUpdateException
 	{
-		init(observer);
+		setObserver(observer);
+		init();
 		loadPackage(filePath);
 		backup();
 		update();
 	}
 	
-	public static void init(ProcessObserverFacade<?> observer) throws PatchUpdateException
+	public static void setObserver(ProcessObserverFacade<?> observer)
 	{
 		UpdateContext.getContext().setObserver(observer);
-		
+	}
+	
+	public static void init() throws PatchUpdateException
+	{
 		ConfigService configService = ConfigServiceFactory.getConfigService();
 		configService.loadConfig(UpdateContext.getContext());
 	}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<patch-update-tool>
+	<base-path>/Users/lihaoyuan/TempFolder/put</base-path>
+	<program>
+		<path id="p1">/Users/lihaoyuan/TempFolder/program1</path>
+		<path id="p2">/Users/lihaoyuan/TempFolder/program2</path>
+	</program>
+	<error-handle>IGNORE</error-handle>
+	
+	<remote localip="localhost">
+		<service port="54321">testservice</service>
+		<observer port="12345">testobserver</observer>
+	</remote>
+</patch-update-tool>
